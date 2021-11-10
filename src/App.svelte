@@ -1,4 +1,5 @@
 <script>
+	let editingPlayers = false
 	let latestId = 1
 	let players = []
 	$: { //debug prints
@@ -21,6 +22,28 @@
 		})
 		players = players
 		latestId++
+	}
+
+	function removePlayer(id) {
+		console.log("removing player " + id)
+		let toDelete = players.filter(function(x) {
+			return x.id == id
+		})
+
+		let index = players.indexOf(toDelete[0])
+
+		players.splice(index, 1)
+		players = players
+	}
+
+	function editPlayers() {
+		console.log("editing players")
+		editingPlayers = true
+	}
+
+	function done() {
+		console.log("done editing players")
+		editingPlayers = false
 	}
 
 	function next() {
@@ -52,16 +75,32 @@
 </script>
 
 <div>
-	<h1>Animant</h1>
-	<div class="main-grid">
-		{#each players as player (player.id)}
-			<input type="text" bind:value={player.name}>
-			<!-- inputmode does not work?! -->
-			<input type="text" inputmode="numeric" bind:value={player.ini}>
-		{/each}
-	</div>
+	<h1>Animant</h1> 
+	
+	{#if editingPlayers}
+		<div class="edit-grid">
+			{#each players as player (player.id)}
+				<input type="text" bind:value={player.name}>
+				<button on:click={removePlayer(player.id)}>x</button>
+			{/each}
+		</div>
+	{:else}
+		<div class="main-grid">
+			{#each players as player (player.id)}		
+				<div>
+					{player.name}
+				</div>
+				<input type="number" bind:value={player.ini}>
+			{/each}
+		</div>
+	{/if}
 	<div class="bottom-buttons">
-		<button on:click={addPlayer}>Add Player</button>
-		<button on:click={next}>Next</button> 
+		{#if editingPlayers}
+			<button on:click={addPlayer}>Add Player</button>
+			<button on:click={done}>Done</button>
+		{:else}
+			<button on:click={editPlayers}>Edit Players</button>
+			<button on:click={next}>Next</button> 
+		{/if}
 	</div>
 </div>
