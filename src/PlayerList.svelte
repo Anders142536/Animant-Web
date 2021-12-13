@@ -46,6 +46,17 @@
 		console.log(`lowest: ${lowestDiff}`)
 		return lowestDiff
 	}
+	
+	function input(event, id) {
+		console.log("> value: " + event.target.value)
+		if (/^\d+$/.test(event.target.value)) {
+			players.find(p => p.id == id).ini = Number(event.target.value)
+			players = players
+		} else {
+			disableNext = true
+		}
+		
+	}
 </script>
 
 
@@ -58,6 +69,6 @@
         <div>
             {player.name}
         </div>
-        <input type="number" bind:value={player.ini}>
+        <input type="number" value={player.ini} on:input={e => input(e, player.id)}>
     {/each}
 </div>
