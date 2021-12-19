@@ -9,12 +9,10 @@
 <script>
     export let players
     export let editingPlayers
-
-	let disableNext = true
-	$: {
-		players = players
-		disableNext = findLowestIni() == 0
-	}
+	
+	let failedEditAttempts = {}
+	let disableNext = false
+	
 
 	function editPlayers() {
 		console.log("editing players")
@@ -49,13 +47,21 @@
 	
 	function input(event, id) {
 		console.log("> value: " + event.target.value)
+
+		// valid number value
 		if (/^\d+$/.test(event.target.value)) {
 			players.find(p => p.id == id).ini = Number(event.target.value)
 			players = players
+
+			failedEditAttempts[id] = false
+			disableNext = Object.values(failedEditAttempts).includes(true);
+			console.log("success")
 		} else {
+			console.log("failed attempt: " + event.target.value)
+			failedEditAttempts[id] = true
 			disableNext = true
+			console.log("failed")
 		}
-		
 	}
 </script>
 
