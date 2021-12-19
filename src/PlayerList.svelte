@@ -46,18 +46,19 @@
 	}
 	
 	function input(event, id) {
+		let inputValue = event.target.value.trim()
 		console.log("> value: " + event.target.value)
 
 		// valid number value
-		if (/^\d+$/.test(event.target.value)) {
-			players.find(p => p.id == id).ini = Number(event.target.value)
+		if (/^\d+$/.test(inputValue)) {
+			players.find(p => p.id == id).ini = Number(inputValue)
 			players = players
 
 			failedEditAttempts[id] = false
 			disableNext = Object.values(failedEditAttempts).includes(true);
 			console.log("success")
 		} else {
-			console.log("failed attempt: " + event.target.value)
+			console.log("failed attempt: " + inputValue)
 			failedEditAttempts[id] = true
 			disableNext = true
 			console.log("failed")
