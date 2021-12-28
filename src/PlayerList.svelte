@@ -48,6 +48,8 @@
 			if (Number(a.ini) < Number(b.ini)) return -1
 			return 1
 		})
+		resetFailedEditAttempts()
+		disableNext = true
 	}
 
 	function findLowestIni() {
