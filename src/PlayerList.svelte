@@ -10,9 +10,24 @@
     export let players
     export let editingPlayers
 	
-	let failedEditAttempts = {}
+	let failedEditAttempts
+	resetFailedEditAttempts()
+
+	// requires failedEditAttempts to be properly reset!
 	let disableNext = shallDisableNext()
 	
+	
+
+	// fills failedEditAttempts with true for every player id that does not have
+	// a positive integer in its ini field
+	function resetFailedEditAttempts() {
+		failedEditAttempts = {}
+		for (let i in players) {
+			if (players[i].ini == 0) {
+				failedEditAttempts[players[i].id] = true
+			}
+		}
+	}
 
 	function editPlayers() {
 		console.log("editing players")
@@ -68,7 +83,6 @@
 	function shallDisableNext() {
 		console.log("shall disable Next?")
 		let values = Object.values(failedEditAttempts)
-		console.log("values length: " + values.length)
 		return values.length == 0 || values.includes(true);
 	}
 
