@@ -15,8 +15,6 @@
 		}
 		console.log(output)
 	}
-
-
 </script>
 
 <div>

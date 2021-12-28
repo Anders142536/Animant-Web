@@ -11,7 +11,7 @@
     export let editingPlayers
 	
 	let failedEditAttempts = {}
-	let disableNext = false
+	let disableNext = shallDisableNext()
 	
 
 	function editPlayers() {
@@ -55,7 +55,7 @@
 			players = players
 
 			failedEditAttempts[id] = false
-			disableNext = Object.values(failedEditAttempts).includes(true);
+			disableNext = shallDisableNext();
 			console.log("success")
 		} else {
 			console.log("failed attempt: " + inputValue)
@@ -64,6 +64,14 @@
 			console.log("failed")
 		}
 	}
+
+	function shallDisableNext() {
+		console.log("shall disable Next?")
+		let values = Object.values(failedEditAttempts)
+		console.log("values length: " + values.length)
+		return values.length == 0 || values.includes(true);
+	}
+
 </script>
 
 
