@@ -3,7 +3,12 @@
 	    display: grid;
 	    width: 300px;
 	    grid-template-columns: auto 80px ;
+		align-items: center;
     }
+
+	.player-name {
+		margin-bottom: 0.4em;
+	}
 </style>
 
 <script>
@@ -92,12 +97,17 @@
 
 
 <div class="button-bar">
-    <button on:click={editPlayers}>Edit Players</button>
-    <button disabled={disableNext} on:click={next}>Next</button> 
+    <button on:click={editPlayers}>
+		<i class="fas fa-users-cog"></i> Edit Actors
+	</button>
+    <button disabled={disableNext} on:click={next}>
+		Next Turn
+		<i class="fas fa-arrow-right"></i>
+	</button> 
 </div>
 <div class="main-grid">
     {#each players as player (player.id)}		
-        <div>
+        <div class="player-name">
             {player.name}
         </div>
         <input type="number" value={player.ini} on:input={e => input(e, player.id)}>

@@ -47,12 +47,20 @@
 </script>
 
 <div class="button-bar">
-	<button on:click={addPlayer}>Add Player</button>
-	<button on:click={done}>Done</button>
+	<button on:click={addPlayer}>
+		<i class="fas fa-plus"></i>
+		Add Actor
+	</button>
+	<button on:click={done}>
+		Done
+		<i class="fas fa-chevron-right"></i>
+	</button>
 </div>
 <div class="edit-grid">
     {#each players as player (player.id)}
         <input type="text" bind:value={player.name}>
-        <button on:click={removePlayer(player.id)}>x</button>
+        <button style="padding-top: 0px;" on:click={removePlayer(player.id)}>
+			<i class="fas fa-trash"></i>
+		</button>
     {/each}
 </div>
