@@ -6,6 +6,7 @@
 		box-shadow: 0 0 20px #000;
 		outline: 2px solid #000;
 		padding: 0 10px 5px;
+		margin: 10px;
 		height: fit-content;
 	}
 
