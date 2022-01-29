@@ -6,11 +6,11 @@
 		box-shadow: 0 0 20px #000;
 		outline: 2px solid #000;
 		padding: 0 10px 5px;
-		margin: 10px;
+		margin: 20px;
 		height: fit-content;
 	}
 
-	.shadow-shaper {
+	.shadow-shaper {	
 		overflow: hidden;
 		padding-bottom: 10px;
 	}
