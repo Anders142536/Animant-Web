@@ -8,29 +8,19 @@
 
 
 <script >
-    export let players
-    export let latestId
-    export let editingPlayers
-    
-    export function init() {
-        addPlayer()
-        addPlayer()
-    }
+	import { c } from './stores'
+	import { cSess } from './stores'
+	import { sessions } from './stores'
+	import { editingPlayers } from './stores'
 
 	function done() {
 		console.log("done editing players")
-		editingPlayers = false
+		editingPlayers.set(false)
 	}
 
 	export function addPlayer() {
 		console.log("adding player")
-		players.push({
-			id: latestId,
-			name: "Player " + latestId,
-			ini: 0
-		})
-		players = players
-		latestId++
+		sessions.addPlayer($cSess)
 	}
 
 	function removePlayer(id) {
@@ -57,7 +47,7 @@
 	</button>
 </div>
 <div class="edit-grid">
-    {#each players as player (player.id)}
+    {#each $c.players as player (player.id)}
         <input type="text" bind:value={player.name}>
         <button style="padding-top: 0px;" on:click={removePlayer(player.id)}>
 			<i class="fas fa-trash"></i>

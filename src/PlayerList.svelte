@@ -12,8 +12,10 @@
 </style>
 
 <script>
-    export let players
-    export let editingPlayers
+	import { c } from './stores'
+	import { cSess } from './stores'
+	import { sessions } from './stores'
+	import { editingPlayers } from './stores'
 	
 	let failedEditAttempts
 	resetFailedEditAttempts()
@@ -27,28 +29,28 @@
 	// a positive integer in its ini field
 	function resetFailedEditAttempts() {
 		failedEditAttempts = {}
-		for (let i in players) {
-			if (players[i].ini == 0) {
-				failedEditAttempts[players[i].id] = true
+		for (let i in $c.players) {
+			if ($c.players[i].ini == 0) {
+				failedEditAttempts[$c.players[i].id] = true
 			}
 		}
 	}
 
 	function editPlayers() {
 		console.log("editing players")
-		editingPlayers = true
+		editingPlayers.set(true)
 	}
 
 	function next() {
 		console.log("neeeext!")
-		if (players.length == 0) { return; }
+		if ($c.players.length == 0) { return; }
 		let lowestIni = findLowestIni()
 
-		for (let i in players) {
-			players[i].ini -= lowestIni
+		for (let i in $c.players) {
+			$sessions[$cSess].players[i].ini -= lowestIni
 		}
 
-		players.sort(function(a, b) {
+		$sessions[$cSess].players.sort(function(a, b) {
 			if (Number(a.ini) == Number(b.ini)) return 0
 			if (Number(a.ini) < Number(b.ini)) return -1
 			return 1
@@ -58,11 +60,11 @@
 	}
 
 	function findLowestIni() {
-		let lowestDiff = players.reduce(function(lowestSoFar, nextPlayer) {
+		let lowestDiff = $c.players.reduce(function(lowestSoFar, nextPlayer) {
 			let lowest = Number(lowestSoFar)
 			let nextIni = Number(nextPlayer.ini)
 			return nextIni < lowest ? nextIni : lowest
-		}, players[1].ini)
+		}, $c.players[1].ini)
 		console.log(`lowest: ${lowestDiff}`)
 		return lowestDiff
 	}
@@ -106,7 +108,7 @@
 	</button> 
 </div>
 <div class="main-grid">
-    {#each players as player (player.id)}		
+    {#each $c.players as player (player.id)}		
         <div class="player-name">
             {player.name}
         </div>
