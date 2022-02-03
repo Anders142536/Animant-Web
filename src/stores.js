@@ -32,6 +32,21 @@ function createSessions() {
 
 		    quo[sessId].players.splice(index, 1)
             return quo
+        }),
+        reducePlayerIniBy: (sessId, n) => update(quo => {
+            for (let i in quo[sessId].players) {
+                quo[sessId].players[i].ini -= n
+            }
+            quo[sessId].players.sort(function(a, b) {
+			    if (Number(a.ini) == Number(b.ini)) return 0
+			    if (Number(a.ini) < Number(b.ini)) return -1
+			    return 1
+            })
+            return quo
+        }),
+        setPlayerIni: (sessId, playerId, ini) => update(quo => {
+            quo[sessId].players.find(p => p.id == playerId).ini = Number(ini)
+            return quo
         })
     }
 }

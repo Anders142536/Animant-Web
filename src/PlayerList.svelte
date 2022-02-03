@@ -12,10 +12,7 @@
 </style>
 
 <script>
-	import { c } from './stores'
-	import { cSess } from './stores'
-	import { sessions } from './stores'
-	import { editingPlayers } from './stores'
+	import { c, cSess, sessions, editingPlayers } from './stores'
 	
 	let failedEditAttempts
 	resetFailedEditAttempts()
@@ -44,17 +41,7 @@
 	function next() {
 		console.log("neeeext!")
 		if ($c.players.length == 0) { return; }
-		let lowestIni = findLowestIni()
-
-		for (let i in $c.players) {
-			$sessions[$cSess].players[i].ini -= lowestIni
-		}
-
-		$sessions[$cSess].players.sort(function(a, b) {
-			if (Number(a.ini) == Number(b.ini)) return 0
-			if (Number(a.ini) < Number(b.ini)) return -1
-			return 1
-		})
+		sessions.reducePlayerIniBy($cSess, findLowestIni())
 		resetFailedEditAttempts()
 		disableNext = true
 	}
@@ -75,8 +62,7 @@
 
 		// valid number value
 		if (/^\d+$/.test(inputValue)) {
-			players.find(p => p.id == id).ini = Number(inputValue)
-			players = players
+			sessions.setPlayerIni($cSess, id, inputValue)
 
 			failedEditAttempts[id] = false
 			disableNext = shallDisableNext();

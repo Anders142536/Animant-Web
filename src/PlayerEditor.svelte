@@ -8,10 +8,7 @@
 
 
 <script >
-	import { c } from './stores'
-	import { cSess } from './stores'
-	import { sessions } from './stores'
-	import { editingPlayers } from './stores'
+	import { cSess, sessions, editingPlayers } from './stores'
 
 	function done() {
 		console.log("done editing players")
