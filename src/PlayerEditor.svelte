@@ -25,14 +25,7 @@
 
 	function removePlayer(id) {
 		console.log("removing player " + id)
-		let toDelete = players.filter(function(x) {
-			return x.id == id
-		})
-
-		let index = players.indexOf(toDelete[0])
-
-		players.splice(index, 1)
-		players = players
+		sessions.removePlayer($cSess, id)
 	}
 </script>
 
@@ -47,7 +40,7 @@
 	</button>
 </div>
 <div class="edit-grid">
-    {#each $c.players as player (player.id)}
+    {#each $sessions[$cSess].players as player (player.id)}
         <input type="text" bind:value={player.name}>
         <button style="padding-top: 0px;" on:click={removePlayer(player.id)}>
 			<i class="fas fa-trash"></i>

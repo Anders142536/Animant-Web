@@ -16,16 +16,23 @@ function createSessions() {
 
     return {
         subscribe,
-        addPlayer: (sessionId) => update(x => {
-                console.log(sessionId)
-                x[sessionId].latestId++
-                x[sessionId].players.push({ 
-                    id: x[sessionId].latestId,
-                    name: "Player " + x[sessionId].latestId,
-                    ini: 0
-                })
-            }),
-        removePlayer: () => {}
+        set,
+        addPlayer: (sessId) => update(quo => {
+            quo[sessId].latestId++
+            quo[sessId].players.push({ 
+                id: quo[sessId].latestId,
+                name: "Player " + quo[sessId].latestId,
+                ini: 0
+            })
+            return quo
+        }),
+        removePlayer: (sessId, playerId) => update(quo => {
+		    let toDelete = quo[sessId].players.filter(x => x.id == playerId)
+		    let index = quo[sessId].players.indexOf(toDelete[0])
+
+		    quo[sessId].players.splice(index, 1)
+            return quo
+        })
     }
 }
 export const sessions = createSessions()
