@@ -3,19 +3,24 @@ import { writable, derived } from 'svelte/store'
 export const editingPlayers = writable(false)
 export const cSess = writable(0)
 
-function createSessions() {
-    const { subscribe, set, update } = writable([
-    {
-        name: 'Session 1',
-        latestId: 2,
-        players: [
-            { id: 1, name: 'Player 1', ini: 0 },
-            { id: 2, name: 'Player 2', ini: 0 }
-        ]
-    }])
+function getSessionsStoreOrDefault() {
+	const sessions = localStorage.getItem("sessions") 
+	if (sessions) return JSON.parse(sessions)
+	return [{
+		name: 'Session 1',
+		latestId: 2,
+		players: [
+			{ id: 1, name: 'Player 1', ini: 0 },
+			{ id: 2, name: 'Player 2', ini: 0 }
+		]
+	}]
+}
+
+function createSessionsStore() {
+    const { subscribe, set, update } = writable(getSessionsStoreOrDefault())
 
     return {
-        subscribe,
+		subscribe,
         set,
         addPlayer: (sessId) => update(quo => {
             quo[sessId].latestId++
@@ -50,7 +55,11 @@ function createSessions() {
         })
     }
 }
-export const sessions = createSessions()
+export const sessions = createSessionsStore()
+sessions.subscribe(val => {
+	console.log("storing sessions")
+	localStorage.setItem("sessions", JSON.stringify(val))
+})
 
 // current session
 export const c = derived(
