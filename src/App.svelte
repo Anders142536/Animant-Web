@@ -15,6 +15,11 @@
 		padding-bottom: 10px;
 	}
 
+	.header-settings-area {
+		display: flex;
+		justify-content: space-between;
+	}
+
 </style>
 
 <script>
@@ -26,7 +31,12 @@
 </script>
 
 <div class="big-box" >
-	<h1>Animant</h1>
+	<div class="header-settings-area" >
+		<h1>Animant</h1>
+		<button on:click="DO ME DADDY">
+			<!-- TODO -->
+		</button>
+	</div>
 	<!-- div necessary to shape shadow the way we want it to be -->
 	<div class="shadow-shaper">
 		<h3>{$c.name}</h3>
