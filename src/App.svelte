@@ -29,6 +29,8 @@
 	// components
 	import PlayerEditor from './PlayerEditor.svelte'
 	import PlayerList from './PlayerList.svelte'
+	import SessionsEditor from './SessionsEditor.svelte'
+	import SettingsEditor from './SettingsEditor.svelte'
 
 	function settings() {
 		console.log("going to settings")
@@ -50,7 +52,11 @@
 	
 	{#if $currentView === views.PlayerEditor}
 		<PlayerEditor />
-	{:else}
+	{:else if $currentView === views.PlayerList}
 		<PlayerList  />
+	{:else if $currentView === views.SessionsEditor}
+		<SessionsEditor />
+	{:else if $currentView === views.Settings}
+		<SettingsEditor />
 	{/if}
 </div>
