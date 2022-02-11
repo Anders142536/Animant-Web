@@ -1,7 +1,12 @@
 import { writable, derived } from 'svelte/store'
+import { views } from './enums'
 
-export const editingPlayers = writable(false)
-export const cSess = writable(0)
+export const currentView = writable(views.PlayerList)
+export const cSess = writable(localStorage.getItem("cSess") || 0)
+cSess.subscribe(val => {
+	console.log("storing current session")
+	localStorage.setItem("cSess", val)
+})
 
 function getSessionsStoreOrDefault() {
 	const sessions = localStorage.getItem("sessions") 

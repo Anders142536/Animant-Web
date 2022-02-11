@@ -23,18 +23,24 @@
 </style>
 
 <script>
-	import { c } from './stores'
-	import { editingPlayers } from './stores'
+	import { c, currentView } from './stores'
+	import { views, icons } from './enums'
+
+	// components
 	import PlayerEditor from './PlayerEditor.svelte'
 	import PlayerList from './PlayerList.svelte'
 
+	function settings() {
+		console.log("going to settings")
+		currentView.set(views.Settings)
+	}
 </script>
 
 <div class="big-box" >
 	<div class="header-settings-area" >
 		<h1>Animant</h1>
-		<button on:click="DO ME DADDY">
-			<!-- TODO -->
+		<button on:click={settings}>
+			<i class={icons.settings}></i>
 		</button>
 	</div>
 	<!-- div necessary to shape shadow the way we want it to be -->
@@ -42,7 +48,7 @@
 		<h3>{$c.name}</h3>
 	</div>
 	
-	{#if $editingPlayers}
+	{#if $currentView === views.PlayerEditor}
 		<PlayerEditor />
 	{:else}
 		<PlayerList  />

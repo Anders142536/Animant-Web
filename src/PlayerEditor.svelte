@@ -8,11 +8,12 @@
 
 
 <script >
-	import { cSess, sessions, editingPlayers } from './stores'
+	import { cSess, sessions, currentView } from './stores'
+	import { icons } from './enums'
 
 	function done() {
 		console.log("done editing players")
-		editingPlayers.set(false)
+		currentView.set(false)
 	}
 
 	export function addPlayer() {
@@ -28,12 +29,12 @@
 
 <div class="button-bar">
 	<button on:click={addPlayer}>
-		<i class="fas fa-plus"></i>
+		<i class={icons.plus}></i>
 		Add Actor
 	</button>
 	<button on:click={done}>
 		Done
-		<i class="fas fa-chevron-right"></i>
+		<i class={icons.chevronright}></i>
 	</button>
 </div>
 <div class="edit-grid">

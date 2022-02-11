@@ -12,7 +12,8 @@
 </style>
 
 <script>
-	import { c, cSess, sessions, editingPlayers } from './stores'
+	import { c, cSess, sessions, currentView } from './stores'
+	import { views, icons } from './enums'
 	
 	let failedEditAttempts
 	resetFailedEditAttempts()
@@ -35,7 +36,7 @@
 
 	function editPlayers() {
 		console.log("editing players")
-		editingPlayers.set(true)
+		currentView.set(views.PlayerEditor)
 	}
 
 	function next() {
@@ -86,11 +87,11 @@
 
 <div class="button-bar">
     <button on:click={editPlayers}>
-		<i class="fas fa-users-cog"></i> Edit Actors
+		<i class={icons.editusers}></i> Edit Actors
 	</button>
     <button disabled={disableNext} on:click={next}>
 		Next Turn
-		<i class="fas fa-arrow-right"></i>
+		<i class={icons.arrowright}></i>
 	</button> 
 </div>
 <div class="main-grid">
