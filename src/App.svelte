@@ -8,6 +8,10 @@
 		padding: 0 10px 5px;
 		margin: 20px;
 		height: fit-content;
+		width: 100vw;
+		max-height: calc(100vh - 61px);
+		max-width: 600px;
+
 	}
 
 	.shadow-shaper {	

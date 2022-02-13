@@ -1,19 +1,20 @@
 <style>
     .edit-grid {
 	    display: grid;
-	    width: 300px;
-	    grid-template-columns: auto 20px;
+	    grid-template-columns: auto 30px;
+		max-height: calc(100vh - 210px);
+		overflow-y: auto;
     }
 </style>
 
 
 <script >
 	import { cSess, sessions, currentView } from './stores'
-	import { icons } from './enums'
+	import { icons, views } from './enums'
 
 	function done() {
 		console.log("done editing players")
-		currentView.set(false)
+		currentView.set(views.PlayerList)
 	}
 
 	export function addPlayer() {

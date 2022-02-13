@@ -1,14 +1,11 @@
 <style>
-    .main-grid {
+    .list-grid {
 	    display: grid;
-	    width: 300px;
 	    grid-template-columns: auto 80px ;
 		align-items: center;
+		max-height: calc(100vh - 210px);
+		overflow-y: auto;
     }
-
-	.player-name {
-		margin-bottom: 0.4em;
-	}
 </style>
 
 <script>
@@ -94,11 +91,13 @@
 		<i class={icons.arrowright}></i>
 	</button> 
 </div>
-<div class="main-grid">
+<div class="list-grid">
     {#each $c.players as player (player.id)}		
-        <div class="player-name">
+        <div class="name-wrapper">
             {player.name}
         </div>
         <input type="number" value={player.ini} on:input={e => input(e, player.id)}>
     {/each}
 </div>
+
+
