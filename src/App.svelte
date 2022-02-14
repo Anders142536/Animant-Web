@@ -5,7 +5,7 @@
 		border-radius: 2px;
 		box-shadow: 0 0 20px #000;
 		outline: 2px solid #000;
-		padding: 0 10px 5px;
+		padding: 10px 10px 5px;
 		margin: 20px;
 		height: fit-content;
 		width: 100vw;
@@ -45,9 +45,11 @@
 <div class="big-box" >
 	<div class="header-settings-area" >
 		<h1>Animant</h1>
-		<button on:click={settings}>
-			<i class={icons.settings}></i>
-		</button>
+		<div>
+			<button on:click={settings}>
+				<i class={icons.settings}></i>
+			</button>
+		</div>
 	</div>
 	<!-- div necessary to shape shadow the way we want it to be -->
 	<div class="shadow-shaper">
