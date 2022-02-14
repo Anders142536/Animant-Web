@@ -14,11 +14,6 @@
 
 	}
 
-	.shadow-shaper {	
-		overflow: hidden;
-		padding-bottom: 10px;
-	}
-
 	.header-settings-area {
 		display: flex;
 		justify-content: space-between;
@@ -50,10 +45,6 @@
 				<i class={icons.settings}></i>
 			</button>
 		</div>
-	</div>
-	<!-- div necessary to shape shadow the way we want it to be -->
-	<div class="shadow-shaper">
-		<h3>{$c.name}</h3>
 	</div>
 	
 	{#if $currentView === views.PlayerEditor}

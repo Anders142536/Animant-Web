@@ -14,6 +14,11 @@
 
 </script>
 
+<!-- div necessary to shape shadow the way we want it to be -->
+<div class="shadow-shaper">
+	<h3>Settings</h3>
+</div>
+
 <div class="button-bar">
 	<div />
 	<button on:click={done}>

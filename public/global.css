@@ -96,6 +96,11 @@ button:hover {
 	text-shadow: 0 0 8px red;
 }
 
+.shadow-shaper {	
+	overflow: hidden;
+	padding-bottom: 10px;
+}
+
 .button-bar {
 	display: flex;
 	justify-content: space-between;
