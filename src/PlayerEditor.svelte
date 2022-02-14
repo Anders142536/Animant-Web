@@ -1,18 +1,20 @@
 <style>
     .edit-grid {
 	    display: grid;
-	    width: 300px;
-	    grid-template-columns: auto 20px;
+	    grid-template-columns: auto 30px;
+		max-height: calc(100vh - 210px);
+		overflow-y: auto;
     }
 </style>
 
 
 <script >
-	import { cSess, sessions, editingPlayers } from './stores'
+	import { c, cSess, sessions, currentView } from './stores'
+	import { icons, views } from './enums'
 
 	function done() {
 		console.log("done editing players")
-		editingPlayers.set(false)
+		currentView.set(views.PlayerList)
 	}
 
 	export function addPlayer() {
@@ -26,14 +28,19 @@
 	}
 </script>
 
+<!-- div necessary to shape shadow the way we want it to be -->
+<div class="shadow-shaper">
+	<h3>{$c.name}</h3>
+</div>
+
 <div class="button-bar">
 	<button on:click={addPlayer}>
-		<i class="fas fa-plus"></i>
+		<i class={icons.plus}></i>
 		Add Actor
 	</button>
 	<button on:click={done}>
 		Done
-		<i class="fas fa-chevron-right"></i>
+		<i class={icons.chevronright}></i>
 	</button>
 </div>
 <div class="edit-grid">

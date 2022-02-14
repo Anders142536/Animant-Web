@@ -1,18 +1,16 @@
 <style>
-    .main-grid {
+    .list-grid {
 	    display: grid;
-	    width: 300px;
 	    grid-template-columns: auto 80px ;
 		align-items: center;
+		max-height: calc(100vh - 210px);
+		overflow-y: auto;
     }
-
-	.player-name {
-		margin-bottom: 0.4em;
-	}
 </style>
 
 <script>
-	import { c, cSess, sessions, editingPlayers } from './stores'
+	import { c, cSess, sessions, currentView } from './stores'
+	import { views, icons } from './enums'
 	
 	let failedEditAttempts
 	resetFailedEditAttempts()
@@ -35,7 +33,7 @@
 
 	function editPlayers() {
 		console.log("editing players")
-		editingPlayers.set(true)
+		currentView.set(views.PlayerEditor)
 	}
 
 	function next() {
@@ -83,21 +81,27 @@
 
 </script>
 
+<!-- div necessary to shape shadow the way we want it to be -->
+<div class="shadow-shaper">
+	<h3>{$c.name}</h3>
+</div>
 
 <div class="button-bar">
     <button on:click={editPlayers}>
-		<i class="fas fa-users-cog"></i> Edit Actors
+		<i class={icons.editusers}></i> Edit Actors
 	</button>
     <button disabled={disableNext} on:click={next}>
 		Next Turn
-		<i class="fas fa-arrow-right"></i>
+		<i class={icons.arrowright}></i>
 	</button> 
 </div>
-<div class="main-grid">
+<div class="list-grid">
     {#each $c.players as player (player.id)}		
-        <div class="player-name">
+        <div class="name-wrapper">
             {player.name}
         </div>
         <input type="number" value={player.ini} on:input={e => input(e, player.id)}>
     {/each}
 </div>
+
+
